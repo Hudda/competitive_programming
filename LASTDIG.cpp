@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void rectangles(int n) {
-	int count = 0;
-	for (int i = 1; i <= sqrt(n); i++) {
-            for (int j = i; j * i <= n; j++)
-                count++;
-	}
-	cout << count;
+int digit(int a, long long b) {
+	int p, mod;
+	mod = b % 4;
+	if (mod == 0 && b != 0)
+		p = pow(a, 4);
+	else 
+		p = pow(a, mod);
+	return p % 10;
 }
 
 int main(void) {
@@ -19,8 +20,13 @@ int main(void) {
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n;
-    cin >> n;
-    rectangles(n);
+    int t;
+    cin >> t;
+    int a;
+    long long b;
+    for (int z = 0; z < t; z++) {
+    	cin >> a >> b;
+    	cout << digit(a, b) << endl;
+    }
     return 0;
 }
