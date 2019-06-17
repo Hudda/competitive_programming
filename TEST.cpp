@@ -2,15 +2,14 @@
 using namespace std;
 
 int main(void) {
+	#ifndef ONLINE_JUDGE
+        // for getting input from input.txt
+        freopen("input.txt", "r", stdin);
+        // for writing output to output.txt
+        freopen("output.txt", "w", stdout);
+    #endif
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-	int num;
-	while(1) {
-        cout << "helo";
-        cin >> num;
-        if (num == 42)
-            break;
-        cout << num;
-	}
+	cout << "Hello";
 	return 0;
 }
