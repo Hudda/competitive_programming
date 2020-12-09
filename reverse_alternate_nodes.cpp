@@ -16,17 +16,35 @@ struct LinkedList {
         head = NULL;
     }
 
-    void reverse() {
+    Node* reverse(Node* head, int k) {
         Node* curr = head;
         Node* next = NULL;
         Node* prev = NULL;
-        while (curr != NULL) {
+        int count = 0;
+        while (curr != NULL && count < k) {
             next = curr->next;
             curr->next = prev;
             prev = curr;
             curr = next;
+            count ++;
         }
-        head = prev;
+        if (head != NULL)
+            head->next = curr;
+        count = 0;
+        while (curr != NULL && count < k - 1) {
+            curr = curr->next;
+            count++;
+        }
+
+        if (curr != NULL)
+            curr->next = reverse(curr->next, k);
+        return prev;
+    }
+
+    void push(int data) {
+        Node* temp = new Node(data);
+        temp->next = head;
+        head = temp;
     }
 
     void print() {
@@ -35,12 +53,6 @@ struct LinkedList {
             cout << temp->data << " ";
             temp = temp->next;
         }
-    }
-
-    void push(int data) {
-        Node* temp = new Node(data);
-        temp->next = head;
-        head = temp;
     }
 };
 
@@ -54,13 +66,12 @@ int main(void) {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     LinkedList ll;
-    ll.push(20);
-    ll.push(4);
-    ll.push(15);
-    ll.push(85);
+    for (int i = 20; i > 0; i--) {
+        ll.push(i);
+    }
     ll.print();
-    ll.reverse();
     cout << endl;
+    ll.head = ll.reverse(ll.head, 3);
     ll.print();
     return 0;
 }

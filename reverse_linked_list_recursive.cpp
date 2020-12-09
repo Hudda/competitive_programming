@@ -16,17 +16,14 @@ struct LinkedList {
         head = NULL;
     }
 
-    void reverse() {
-        Node* curr = head;
-        Node* next = NULL;
-        Node* prev = NULL;
-        while (curr != NULL) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
+    Node* reverse(Node* head) {
+        if (head == NULL or head->next == NULL) {
+            return head;
         }
-        head = prev;
+        Node* rest = reverse(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return rest;
     }
 
     void print() {
@@ -59,7 +56,7 @@ int main(void) {
     ll.push(15);
     ll.push(85);
     ll.print();
-    ll.reverse();
+    ll.head = ll.reverse(ll.head);
     cout << endl;
     ll.print();
     return 0;
